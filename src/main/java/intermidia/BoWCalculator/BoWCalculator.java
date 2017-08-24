@@ -14,7 +14,8 @@ public class BoWCalculator
     public static void main( String[] args ) throws Exception
     {
     	DataSource dataSource = new DataSource(args[0]);    	
-    	Instances instances = dataSource.getDataSet(0);
+    	Instances input = dataSource.getDataSet(0);
+    	
 /*    	System.out.println(instances.size());
     	for(Instance instance : instances)
     	{
@@ -25,13 +26,15 @@ public class BoWCalculator
     	
        	
     	StringToWordVector bowFilter = new StringToWordVector(500);
-    	bowFilter.setInputFormat(instances);
-    	Instances output = Filter.useFilter(instances, bowFilter);
-    	System.out.println(output.size());
-    	for(Instance instance : output)
+    	bowFilter.setInputFormat(input);
+    	bowFilter.setOutputWordCounts(true);
+    	bowFilter.setWordsToKeep(10);
+    	Instances output = Filter.useFilter(input, bowFilter);
+    	System.out.println(output);
+/*    	for(Instance instance : output)
     	{    		
     		System.out.println(instance.value(0) + " - " + instance.stringValue(1));
-    	}
+    	}*/
     	/*Instance bow = bowFilter.output();*/
     	/*System.out.println(bow);*/
 
