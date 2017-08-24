@@ -1,24 +1,31 @@
 package intermidia.BoWCalculator;
 
+import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
 public class BoWCalculator 
 {
     public static void main( String[] args ) throws Exception
     {
-    	//StringToWordVector bowFilter = new StringToWordVector(500);
     	DataSource dataSource = new DataSource(args[0]);    	
     	Instances instances = dataSource.getDataSet();
-    	System.out.println("Shot \t Text");
-    	int i = 0;
-    	for(Instance inst : instances)
+    	/*System.out.println("Shot \t Text");*/    	
+    	Instance inst = instances.firstInstance();
+    	/*for(Instance attribute : inst.dataset())
     	{
-    		i++;
-        	System.out.println(inst.attribute(1));
-    	}
-    	System.out.println("Inst qty: " + i);
+    		System.out.println(attribute);
+    	}*/
+       	
+    	StringToWordVector bowFilter = new StringToWordVector(500);
+    	bowFilter.setInputFormat(inst.dataset());
+    	Instances output = Filter.useFilter(inst.dataset(), bowFilter);
+    	System.out.println(output);
+    	/*Instance bow = bowFilter.output();*/
+    	/*System.out.println(bow);*/
+
     }
 }
