@@ -13,6 +13,8 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
 
 public class BoWCalculator 
 {
+	//Usage: <in: arff file with shot/subtitle> <in: approx dictionary size> 
+	// <out: BoW per shot file> <out (opt): dictionary words>
     public static void main( String[] args ) throws Exception
     {
     	DataSource dataSource = new DataSource(args[0]);
